@@ -1,0 +1,68 @@
+{
+  "_from": "bootstrap-4-react",
+  "_id": "bootstrap-4-react@0.0.58",
+  "_inBundle": false,
+  "_integrity": "sha512-2xhDJmLN32VqDaW65IRdQ7iGDihNTdePg8zjKPi28CByn3DND2XGnntrSsVO8yHodHsVWL4eL4LEUtHuLBuMJA==",
+  "_location": "/bootstrap-4-react",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "bootstrap-4-react",
+    "name": "bootstrap-4-react",
+    "escapedName": "bootstrap-4-react",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/bootstrap-4-react/-/bootstrap-4-react-0.0.58.tgz",
+  "_shasum": "fc706b97158a94aee25e78840f27a85dc4d0cf94",
+  "_spec": "bootstrap-4-react",
+  "_where": "D:\\Work_Project\\grommet\\jib-register-2019",
+  "author": {
+    "name": "Richard Zhang",
+    "email": "richardzcode@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/richardzcode/bootstrap-4-react/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "bootstrap-4-required": "0.0.1",
+    "fsts": "0.0.44"
+  },
+  "deprecated": false,
+  "description": "Bootstrap 4 React components",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "mocha": "^5.2.0",
+    "react": "^16.4.1",
+    "webpack": "4.19.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "homepage": "https://github.com/richardzcode/bootstrap-4-react#readme",
+  "keywords": [
+    "React",
+    "Bootstrap"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "name": "bootstrap-4-react",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardzcode/bootstrap-4-react.git"
+  },
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "package": "webpack",
+    "test": "mocha --recursive --require babel-register"
+  },
+  "version": "0.0.58"
+}

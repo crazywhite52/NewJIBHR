@@ -1,0 +1,666 @@
+import React, { Component } from "react";
+import Grid from "@material-ui/core/Grid";
+import InfoIcon from "@material-ui/icons/Info";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { TextInput, CheckBox, RadioButtonGroup, Calendar } from "grommet";
+import Select from "react-select";
+import TextField from "@material-ui/core/TextField";
+let newArr = [];
+export default class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title_name: [],
+      pass: false
+    };
+
+    // this.onChangeDDl = this.onChangeDDl.bind(this);
+  }
+  getDataContent(varname, value) {
+    this.setState({ [varname]: value }, () => {
+      this.getDataContentFull();
+    });
+  }
+  getDataContentFull() {
+    newArr = {
+      //   ddBranch: this.state.DDbranchname,
+      //   DDjobname: this.state.DDjobname,
+      //   PTchecked: this.state.PTchecked,
+      //   money: this.state.re_money,
+      //   OWchecked: this.state.OWchecked,
+      //   dateSelect: this.state.dateSelect
+    };
+    // if (
+    //   this.state.DDbranchname.length === 0 ||
+    //   this.state.DDjobname.length < 2 ||
+    //   this.state.re_money === "" ||
+    //   this.state.OWchecked === "" ||
+    //   this.state.dateSelect === ""
+    // ) {
+    //   this.setState({ pass: false }, () => {
+    //     console.log("กรุณาป้อนข้อมูลให้ครบถ้วน");
+    //   });
+    // } else {
+    //   this.setState({ pass: true }, () => {
+    //     this.props.getUpdateContent(1, newArr);
+    //   });
+    // }
+  }
+
+  render() {
+    if (this.state.pass === true) {
+      var passchk = <CheckCircleIcon style={{ color: "green" }} />;
+    } else {
+      var passchk = <InfoIcon style={{ color: "orange" }} />;
+    }
+
+    return (
+      <div>
+        <div>
+          {" "}
+          <hr />
+          <h4>
+            {passchk}
+            &nbsp;ประวัติส่วนตัวผู้สมัครงาน
+          </h4>
+        </div>
+        <Grid
+          container
+          spacing={24}
+          style={{ marginTop: 10, marginLeft: 10, marginRight: 10 }}
+        >
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>
+              คำนำหน้าชื่อ<k style={{ color: "red" }}>*</k>
+            </h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <Select
+              value={this.state.title_name}
+              placeholder="--เลือก--"
+              size="xsmall"
+              style={{ width: 300 ,padding:5}}
+              options={[
+                { value: "0", label: "นาย" },
+                { value: "1", label: "นาง" },
+                { value: "2", label: "นางสาว" }
+              ]}
+              onChange={event => this.getDataContent("title_name", event)}
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>
+              ชื่อจริง<k style={{ color: "red" }}>*</k>
+            </h6>
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              
+              size="xsmall"
+              value={this.state.firstname}
+              onChange={event =>
+                this.setState({ firstname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>
+              นามสกุลจริง<k style={{ color: "red" }}>*</k>
+            </h6>
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.lastname}
+              onChange={event =>
+                this.setState({ lastname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>
+              ชื่อเล่น<k style={{ color: "red" }}>*</k>
+            </h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.nickname}
+              onChange={event =>
+                this.setState({ nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid
+            item
+            lg={2}
+            xl={2}
+            xs={2}
+            sm={2}
+            md={2}
+            style={{ padding: 3 }}
+          />
+          <Grid
+            item
+            lg={2}
+            xl={2}
+            xs={2}
+            sm={2}
+            md={2}
+            style={{ padding: 3 }}
+          />
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>FIRSTNAME(EN)</h6>
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_firstname}
+              onChange={event =>
+                this.setState({ en_firstname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>LASTNAME(EN)</h6>
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_lastname}
+              onChange={event =>
+                this.setState({ en_lastname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>NICKNAME(EN)</h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+         
+          <Grid
+            item
+            lg={2}
+            xl={2}
+            xs={2}
+            sm={2}
+            md={2}
+            style={{ padding: 3 }}
+          />
+           <Grid
+            item
+            lg={12}
+            xl={12}
+            xs={12}
+            sm={12}
+            md={12}
+            style={{ padding: 15 }}
+          />
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>
+              เลขประจำตัวประชาชน<k style={{ color: "red" }}>*</k>
+            </h6>
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.personel_id}
+              onChange={event =>
+                this.setState({ personel_id: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>
+              เพศ<k style={{ color: "red" }}>*</k>
+            </h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <Select
+              value={this.state.sex}
+              placeholder="--เลือก--"
+              size="xsmall"
+              style={{ width: 300 }}
+              options={[
+                { value: "0", label: "ชาย" },
+                { value: "1", label: "หญิง" }
+              ]}
+              onChange={event => this.getDataContent("title_sex", event)}
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>
+              วันเกิด<k style={{ color: "red" }}>*</k>
+            </h6>
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <TextField
+              id="birdthday"
+              //   label="dd/mm/YYYY"
+              type="date"
+              //   defaultValue={(new Date()).toISOString()}
+              //   className={classes.textField}
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>
+              อายุ<k style={{ color: "red" }}>*</k>
+            </h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.agenum}
+              onChange={event =>
+                this.setState({ agenum: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid
+            item
+            lg={1}
+            xl={1}
+            xs={1}
+            sm={1}
+            md={1}
+            style={{ padding: 3 }}
+          />
+
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>
+              กรุ๊ปเลือด<k style={{ color: "red" }}>*</k>
+            </h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <Select
+              value={this.state.sex}
+              placeholder="--เลือก--"
+              size="xsmall"
+              style={{ width: 300 }}
+              options={[
+                { value: "0", label: "A" },
+                { value: "1", label: "B" },
+                { value: "2", label: "O" },
+                { value: "3", label: "AB" }
+              ]}
+              onChange={event => this.getDataContent("bood", event)}
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>ส่วนสูง<k style={{ color: "red" }}>*</k></h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>น้ำหนัก<k style={{ color: "red" }}>*</k></h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>สัญชาติ<k style={{ color: "red" }}>*</k></h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+
+          <Grid
+            item
+            lg={2}
+            xl={2}
+            xs={2}
+            sm={2}
+            md={2}
+            style={{ padding: 3 }}
+          />   
+
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>เชื้อชาติ<k style={{ color: "red" }}>*</k></h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          {/* <Grid
+            item
+            lg={2}
+            xl={2}
+            xs={2}
+            sm={2}
+            md={2}
+            style={{ padding: 3 }}
+          /> */}
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>ศาสนา<k style={{ color: "red" }}>*</k></h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>ภูมิลำเนา จังหวัด <k style={{ color: "red" }}>*</k></h6>
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid
+            item
+            lg={7}
+            xl={7}
+            xs={7}
+            sm={7}
+            md={7}
+            style={{ padding: 3 }}
+          />
+          <Grid
+            item
+            lg={12}
+            xl={12}
+            xs={12}
+            sm={12}
+            md={12}
+            style={{ padding: 3 }}
+          ><hr /></Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>ที่อยู่ที่สามารถติดต่อได้ เลขที่<k style={{ color: "red" }}>*</k></h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>หมู่ที่</h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>ชื่อหมู่บ้าน</h6>
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+         
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>ถนน</h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid
+            item
+            lg={2}
+            xl={2}
+            xs={2}
+            sm={2}
+            md={2}
+            style={{ padding: 3 }}
+          />
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>แขวง</h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+         
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>เขต</h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>จังหวัด<k style={{ color: "red" }}>*</k></h6>
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>รหัสไปรษณีย์<k style={{ color: "red" }}>*</k></h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid
+            item
+            lg={2}
+            xl={2}
+            xs={2}
+            sm={2}
+            md={2}
+            style={{ padding: 3 }}
+          />
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>เบอร์โทรศัพท์</h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>เบอร์มือถือ<k style={{ color: "red" }}>*</k></h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>FAX</h6>
+          </Grid>
+          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <h6 style={{ textAlign: "right" }}>E-mail</h6>
+          </Grid>
+          <Grid item lg={1} xl={1} xs={1} sm={1} md={1} style={{ padding: 3 }}>
+            <TextInput
+              style={{ width: "100%" }}
+              size="xsmall"
+              value={this.state.en_nickname}
+              onChange={event =>
+                this.setState({ en_nickname: event.target.value }, () => {
+                  this.getDataContentFull();
+                })
+              }
+            />
+          </Grid>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </Grid>
+      </div>
+    );
+  }
+}
