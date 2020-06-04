@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import InfoIcon from "@material-ui/icons/Info";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { TextInput, CheckBox, RadioButtonGroup, Calendar } from "grommet";
 import Select from "react-select";
-var options = [
-  { value: "75", label: "ออนไลน์" },
-  { value: "1000", label: "สำนักงานใหญ่" },
-  { value: "100", label: "สาขา อยุธยา" }
-];
+import ApiService from "../actions/api_hr.js";
+import InfoIcon from "@material-ui/icons/Info";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import SweetAlert from "react-bootstrap-sweetalert";
+import { from } from "rxjs";
+let newArr = Array([]);
 const orderOptions = values => {
   return values.filter(v => v.isFixed).concat(values.filter(v => !v.isFixed));
 };
-
-let newArr = Array();
 export default class Job extends Component {
   constructor(props) {
     super(props);
@@ -24,14 +21,58 @@ export default class Job extends Component {
       re_money: "",
       OWchecked: "",
       dateSelect: "",
+      st_work: "",
+      options: [],
+      options2: [],
       pass: false
       // dateSelect:(new Date()).toISOString(),
     };
 
     this.onChangeDDl = this.onChangeDDl.bind(this);
+    this.ApiCall = new ApiService();
+    this.loaddataOg = this.loaddataOg.bind(this);
+  }
+
+  loaddataOg() {
+    this.ApiCall.OgDepartment().then(res => {
+      if (res.status === true) {
+        this.setState({
+          options: res.data
+        });
+      }
+    });
+    this.ApiCall.OgDepartment2().then(res => {
+      if (res.status === true) {
+        this.setState({
+          options2: res.data
+        });
+      }
+    });
+  }
+
+  onChangeDDl(value, { action, removedValue }) {
+    switch (action) {
+      case "remove-value":
+        break;
+      case "pop-value":
+        if (removedValue.isFixed) {
+          return;
+        }
+        break;
+      case "clear":
+        value = this.state.options2.filter(v => v.isFixed);
+        break;
+    }
+    value = orderOptions(value);
+    if (value.length < 3) {
+      this.setState({ DDjobname: value }, () => {
+        this.getDataContentFull();
+      });
+    }
   }
 
   componentDidMount() {
+    this.loaddataOg();
     if (this.props.jobstep1.length === 0) {
     } else {
       this.setState(
@@ -57,13 +98,31 @@ export default class Job extends Component {
     });
   }
   getDataContentFull() {
+    if (this.state.OWchecked === "ว่างงาน (Unemployed)") {
+      this.setState({ st_work: 0 }, () => {
+        //console.log(this.state.st_work);
+      });
+    } else if (this.state.OWchecked === "ทำงานประจำ (Full Time)") {
+      this.setState({ st_work: 1 }, () => {
+        //console.log(this.state.st_work);
+      });
+    } else if (this.state.OWchecked === "Part Time") {
+      this.setState({ st_work: 2 }, () => {
+        //console.log(this.state.st_work);
+      });
+    } else if (this.state.OWchecked === "กำลังจบการศึกษา (I will be graduating)") {
+      this.setState({ st_work: 3 }, () => {
+        //console.log(this.state.st_work);
+      });
+    }
+
     newArr = {
       ddBranch: this.state.DDbranchname,
       DDjobname: this.state.DDjobname,
       PTchecked: this.state.PTchecked,
       money: this.state.re_money,
-      OWchecked: this.state.OWchecked,
-      dateSelect: this.state.dateSelect
+      OWchecked: this.state.st_work,
+      dateSelect: this.state.dateSelect.substring(0, 10)
     };
     if (
       this.state.DDbranchname.length === 0 ||
@@ -81,41 +140,21 @@ export default class Job extends Component {
       });
     }
   }
-
-  onChangeDDl(value, { action, removedValue }) {
-    switch (action) {
-      case "remove-value":
-      case "pop-value":
-        if (removedValue.isFixed) {
-          return;
-        }
-        break;
-      case "clear":
-        value = options.filter(v => v.isFixed);
-        break;
-    }
-    value = orderOptions(value);
-    if (value.length < 3) {
-      this.setState({ DDjobname: value }, () => {
-        this.getDataContentFull();
-      });
-    }
-  }
-
+  hideAlert() {}
   render() {
-    if (this.state.pass === true) {
-      var passchk = <CheckCircleIcon style={{ color: "green" }} />;
-    } else {
-      var passchk = <InfoIcon style={{ color: "orange" }} />;
-    }
     return (
       <div>
+       
         <div>
           {" "}
           <hr />
           <h4>
-            {passchk}
-            &nbsp;ลักษณะงานที่ต้องการ
+            {this.state.pass === true ? (
+              <CheckCircleIcon style={{ color: "green" }} />
+            ) : (
+              <InfoIcon style={{ color: "orange" }} />
+            )}
+            &nbsp;ลักษณะงานที่ต้องการ (Job Requirements)
           </h4>
         </div>
         <Grid
@@ -124,8 +163,8 @@ export default class Job extends Component {
           style={{ marginTop: 10, marginLeft: 10, marginRight: 10 }}
         >
           <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 5 }}>
-            <h6 style={{ textAlign: "right" }}>
-              แผนก/สาขา<k style={{ color: "red" }}>*</k>
+            <h6 style={{ textAlign: "right", fontSize: '14px' }}>
+              แผนก/สาขา (Department/Branch)<k style={{ color: "red" }}>*</k>
             </h6>
           </Grid>
           <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 5 }}>
@@ -134,16 +173,16 @@ export default class Job extends Component {
               placeholder="--เลือกแผนก/สาขาที่สมัคร---"
               size="xsmall"
               style={{ width: 300 }}
-              options={options}
+              options={this.state.options}
               onChange={event => this.getDataContent("DDbranchname", event)}
             />
           </Grid>
-          <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 5 }}>
-            <h6 style={{ textAlign: "right" }}>
-              ตำแหน่งงานที่ต้องการ 2 ตำแหน่ง<k style={{ color: "red" }}>*</k>
+          <Grid item lg={3} xl={3} xs={3} sm={3} md={3} style={{ padding: 5 }}>
+            <h6 style={{ textAlign: "right", fontSize: '14px' }}>
+              ตำแหน่งงานที่ต้องการ 2 ตำแหน่ง (position applied for)<k style={{ color: "red" }}>*</k>
             </h6>
           </Grid>
-          <Grid item lg={4} xl={4} xs={4} sm={4} md={4} style={{ padding: 5 }}>
+          <Grid item lg={3} xl={3} xs={3} sm={3} md={3} style={{ padding: 5 }}>
             <Select
               value={this.state.DDjobname}
               isMulti
@@ -151,7 +190,7 @@ export default class Job extends Component {
               name="colors"
               className="basic-multi-select"
               classNamePrefix="select"
-              options={options}
+              options={this.state.options2}
               onChange={this.onChangeDDl}
             />
           </Grid>
@@ -168,14 +207,15 @@ export default class Job extends Component {
             />
           </Grid>
           <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 5 }}>
-            <h6 style={{ textAlign: "right" }}>
-              เงินเดือนที่ต้องการ<k style={{ color: "red" }}>*</k>
+            <h6 style={{ textAlign: "right", fontSize: '14px' }}>
+              เงินเดือนที่ต้องการ (Salary)<k style={{ color: "red" }}>*</k>
             </h6>
           </Grid>
           <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 5 }}>
             <TextInput
               style={{ width: "100%" }}
               size="xsmall"
+              type="number"
               value={this.state.re_money}
               onChange={event =>
                 this.setState({ re_money: event.target.value }, () => {
@@ -185,18 +225,18 @@ export default class Job extends Component {
             />
           </Grid>
           <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 5 }}>
-            <h6 style={{ textAlign: "right" }}>
-              สถานะภาพการทำงาน(ปัจจุบัน)<k style={{ color: "red" }}>*</k>
+            <h6 style={{ textAlign: "right", fontSize: '14px' }}>
+              สถานะภาพการทำงาน (Work Status)<k style={{ color: "red" }}>*</k>
             </h6>
           </Grid>
           <Grid item lg={6} xl={6} xs={6} sm={6} md={6} style={{ padding: 5 }}>
             <RadioButtonGroup
               name="doc"
               options={[
-                "ว่างงาน",
-                "ทำงานประจำ",
+                "ว่างงาน (Unemployed)",
+                "ทำงานประจำ (Full Time)",
                 "Part Time",
-                "กำลังจบการศึกษา"
+                "กำลังจบการศึกษา (I will be graduating)"
               ]}
               value={this.state.OWchecked}
               onChange={event =>
@@ -207,14 +247,15 @@ export default class Job extends Component {
             />
           </Grid>
           <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 5 }}>
-            <h6 style={{ textAlign: "right" }}>
-              วันที่คิดว่าพร้อมเริ่มงาน<k style={{ color: "red" }}>*</k>
+            <h6 style={{ textAlign: "right", fontSize: '14px' }}>
+              วันที่พร้อมเริ่มงาน (The day began with)<k style={{ color: "red" }}>*</k>
             </h6>
           </Grid>
           <Grid item lg={2} xl={2} xs={2} sm={2} md={2} style={{ padding: 5 }}>
             <Calendar
               size="small"
               locale="en-US"
+              //date={(new Date()).toISOString()}
               margin="xsmall"
               date={this.state.dateSelect}
               onSelect={date => {

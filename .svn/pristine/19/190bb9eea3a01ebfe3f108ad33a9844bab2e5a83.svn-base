@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.js": "/static/js/main.623d4d9a.chunk.js",
+    "main.js.map": "/static/js/main.623d4d9a.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/css/2.43de75c8.chunk.css": "/static/css/2.43de75c8.chunk.css",
+    "static/js/2.dfc36e23.chunk.js": "/static/js/2.dfc36e23.chunk.js",
+    "static/js/2.dfc36e23.chunk.js.map": "/static/js/2.dfc36e23.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.1ae824134da6eba6a703a089da609fd2.js": "/precache-manifest.1ae824134da6eba6a703a089da609fd2.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.43de75c8.chunk.css.map": "/static/css/2.43de75c8.chunk.css.map",
+    "static/media/mdb.css": "/static/media/arrow_right.8ef6a08c.svg",
+    "static/media/all.min.css": "/static/media/fa-solid-900.ef3df984.eot",
+    "static/media/jib-logo-white2.png": "/static/media/jib-logo-white2.bb4ad1d0.png",
+    "static/media/jib1.jpg": "/static/media/jib1.f8ba7f97.jpg",
+    "static/media/jib2.jpg": "/static/media/jib2.8c030408.jpg",
+    "static/media/jib3.jpg": "/static/media/jib3.a5f21fe5.jpg",
+    "static/media/loading.gif": "/static/media/loading.dceeee60.gif"
+  }
+}

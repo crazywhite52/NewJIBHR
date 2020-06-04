@@ -1,0 +1,568 @@
+import React, { Component } from "react";
+import InfoIcon from "@material-ui/icons/Info";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import Grid from "@material-ui/core/Grid";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { withStyles } from "@material-ui/core/styles";
+import { green } from "@material-ui/core/colors";
+import { TextInput } from "grommet";
+export default class CareerHistory extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title_name: [],
+      pass: false
+    };
+    this.getDataContentFull = this.getDataContentFull.bind(this);
+  }
+  getDataContentFull() {
+    console.log(this.state);
+    let newArr = [];
+    newArr = {
+      work_from1: this.state.work_from1,
+      work_from2: this.state.work_from2,
+      work_from3: this.state.work_from3,
+      work_from4: this.state.work_from4,
+      work_from5: this.state.work_from5,
+      work_from6: this.state.work_from6,
+      work_job1: this.state.work_job1,
+      work_job2: this.state.work_job2,
+      work_job3: this.state.work_job3,
+      work_job4: this.state.work_job4,
+      work_job5: this.state.work_job5,
+      work_job6: this.state.work_job6,
+      work_location1: this.state.work_location1,
+      work_location2: this.state.work_location2,
+      work_location3: this.state.work_location3,
+      work_location4: this.state.work_location4,
+      work_location5: this.state.work_location5,
+      work_location6: this.state.work_location6,
+      work_out1: this.state.work_out1,
+      work_out2: this.state.work_out2,
+      work_out3: this.state.work_out3,
+      work_out4: this.state.work_out4,
+      work_out5: this.state.work_out5,
+      work_out6: this.state.work_out6,
+      work_salary1: this.state.work_salary1,
+      work_salary2: this.state.work_salary2,
+      work_salary3: this.state.work_salary3,
+      work_salary4: this.state.work_salary4,
+      work_salary5: this.state.work_salary5,
+      work_salary6: this.state.work_salary6,
+      work_to1: this.state.work_to1,
+      work_to2: this.state.work_to2,
+      work_to3: this.state.work_to3,
+      work_to4: this.state.work_to4,
+      work_to5: this.state.work_to5,
+      work_to6: this.state.work_to6
+    };
+    if (this.state.work_location1 === undefined) {
+    } else {
+      this.setState({ pass: true }, () => {
+        this.props.getUpdateContent(7, newArr);
+      });
+    }
+  }
+  componentDidMount() {}
+  render() {
+    if (this.state.pass === true) {
+      var passchk = <CheckCircleIcon style={{ color: "green" }} />;
+    } else {
+      var passchk = <InfoIcon style={{ color: "orange" }} />;
+    }
+    return (
+      <div>
+        <hr />
+        <h4>
+          {passchk}
+          &nbsp; การทำงาน/ประสบการณ์
+        </h4>
+        <Grid
+          container
+          spacing={24}
+          style={{ marginTop: 10, marginLeft: 10, marginRight: 10 }}
+        >
+          <Grid item lg={12} xl={12} xs={12} sm={12} md={12} style={{}}>
+            <table border="0" width="95%">
+              <tr style={{ backgroundColor: "rgba(0, 0, 0, 0.38)" }}>
+                <th
+                  rowSpan="2"
+                  width=""
+                  style={{ paddingBottom: 10, paddingTop: 10 }}
+                >
+                  <div align="center">ชื่อสถานประกอบการ</div>
+                </th>
+                <th colSpan="2">
+                  <div align="center">ระยะเวลาเดือน/พ.ศ.</div>
+                </th>
+                <th rowSpan="2">
+                  <div align="center">เงินเดือน</div>
+                </th>
+                <th rowSpan="2" width="">
+                  <div align="center">ตำแหน่ง</div>
+                </th>
+                <th rowSpan="2" width="">
+                  <div align="center">สาเหตุที่ออก</div>
+                </th>
+              </tr>
+              <tr style={{ backgroundColor: "rgba(0, 0, 0, 0.38)" }}>
+                <th width="100">
+                  <div align="center">จาก</div>
+                </th>
+                <th width="100">
+                  <div align="center">ถึง</div>
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_location1: event.target.value },
+                        () => {
+                          console.log(this.state.work_location);
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_from1: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_to1: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_salary1: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_job1: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_out1: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_location2: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_from2: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_to2: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_salary2: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_job2: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_out2: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_location3: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_from3: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_to3: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_salary3: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_job3: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_out3: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_location4: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_from4: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_to4: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_salary4: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_job4: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_out4: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_location5: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_from5: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_to5: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_salary5: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_job5: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_out5: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_location6: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_from6: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_to6: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState(
+                        { work_salary6: event.target.value },
+                        () => {
+                          this.getDataContentFull();
+                        }
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_job6: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+                <td>
+                  <TextInput
+                    style={{ width: "100%" }}
+                    size="xsmall"
+                    onChange={event =>
+                      this.setState({ work_out6: event.target.value }, () => {
+                        this.getDataContentFull();
+                      })
+                    }
+                  />
+                </td>
+              </tr>
+            </table>
+          </Grid>
+        </Grid>
+      </div>
+    );
+  }
+}
